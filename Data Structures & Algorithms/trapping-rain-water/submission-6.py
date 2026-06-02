@@ -1,0 +1,15 @@
+class Solution:
+    def trap(self, height: List[int]) -> int:
+        left, right = 0, len(height) - 1
+        leftMax, rightMax = height[left], height[right]
+        res = 0
+        while left < right:
+            if height[left] < height[right]:
+                left += 1
+                leftMax = max(height[left], leftMax)
+                res += (leftMax - height[left])
+            else:
+                right -= 1
+                rightMax = max(height[right], rightMax)
+                res += (rightMax - height[right])
+        return res

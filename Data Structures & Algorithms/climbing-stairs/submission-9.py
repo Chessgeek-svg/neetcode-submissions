@@ -1,0 +1,8 @@
+class Solution:
+    def climbStairs(self, n: int) -> int:
+        step2, step1 = 1, 1
+        for _ in range(n-1):
+            temp = step1 + step2
+            step2 = step1
+            step1 = temp
+        return step1

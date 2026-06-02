@@ -1,0 +1,26 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
+
+class Solution:
+    def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
+        if not node:
+            return None #Literally whats the point of not just always giving at least one node
+        oldtoNew = {}
+        oldtoNew[node] = Node(node.val)
+        queue = deque()
+        queue.append(node)
+        while queue:
+            curr = queue.popleft()
+            for neighbor in curr.neighbors:
+                if neighbor not in oldtoNew:
+                    oldtoNew[neighbor] = Node(neighbor.val)
+                    queue.append(neighbor)
+                oldtoNew[curr].neighbors.append(oldtoNew[neighbor])
+
+        return oldtoNew[node]
+        
